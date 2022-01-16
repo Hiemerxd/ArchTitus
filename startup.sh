@@ -132,7 +132,8 @@ esac
 timezone () {
 # Added this from arch wiki https://wiki.archlinux.org/title/System_time
 time_zone="$(curl --fail https://ipapi.co/timezone)"
-echo -ne "System detected your timezone to be '$time_zone' \n"
+echo -ne "
+System detected your timezone to be '$time_zone' \n"
 echo -ne "Is this correct?
 " 
 options=("Yes" "No")
@@ -152,17 +153,19 @@ case ${options[$choice]} in
 esac
 }
 keymap () {
-# These are default key maps as presented in official arch repo archinstall
-options=(by ca cf cz de dk es et fa fi fr gr hu il it lt lv mk nl no pl ro ru sg ua uk us)
 PS3="
+
 Please select key board layout from this list
 
 "
+# These are default key maps as presented in official arch repo archinstall
+options=(by ca cf cz de dk es et fa fi fr gr hu il it lt lv mk nl no pl ro ru sg ua uk us)
+
 select_option "${options[@]}"
 choice=$?
 keymap=${options[$choice]}
 
-echo -e "\nYour key boards layout: ${keymap} \n"
+echo -ne "\nYour key boards layout: ${keymap} \n"
 set_option KEYMAP $keymap
 }
 
